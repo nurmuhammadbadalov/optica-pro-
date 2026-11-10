@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achki Do'koni | Bosh Sahifa</title>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #151c2c;
+      --bg-card: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --border-color: #334155;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --accent: #d97706;
+      --accent-hover: #b45309;
+      --border-color: #e2e8f0;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+    .cart-badge {
+      background-color: #ef4444;
+      color: white;
+      border-radius: 9999px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-left: 5px;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .control-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .control-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    main {
+      max-width: 1300px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 3.5rem;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+    }
+    .hero p {
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.15rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--accent);
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 2rem;
+    }
+    .product-card {
+      background-color: var(--bg-card);
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+    .product-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      background-color: #ffffff;
+    }
+    .product-info {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .product-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .product-price {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    footer {
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      padding: 2rem;
+      margin-top: auto;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">🕶 OPTIKA.UZ</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active" data-i18n="home">Bosh sahifa</a></li>
+        <li><a href="catalog.html" data-i18n="catalog">Katalog</a></li>
+        <li><a href="detail.html" data-i18n="detail">Batafsil / Trendlar</a></li>
+        <li><a href="cart.html" data-i18n="cart">Savat <span id="cart-badge-count" class="cart-badge">0</span></a></li>
+        <li><a href="contact.html" data-i18n="contact">Aloqa & Buyurtma</a></li>
+      </ul>
+      <div class="controls">
+        <button id="theme-btn" class="control-btn" onclick="toggleTheme()">🌙</button>
+        <button class="control-btn" onclick="changeLanguage('uz')">UZ</button>
+        <button class="control-btn" onclick="changeLanguage('ru')">RU</button>
+        <button class="control-btn" onclick="changeLanguage('en')">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 data-i18n="heroTitle">Premium Ko'zoynaklar Kolleksiyasi</h1>
+      <p data-i18n="heroDesc">O'z uslubingizga mos zamonaviy va sifatli ko'zoynaklarni hamyonbop narxlarda xarid qiling.</p>
+      <a href="catalog.html" class="btn-primary" data-i18n="catalog">Katalogga o'tish</a>
+    </section>
+
+    <h2 style="margin-bottom: 1.8rem; font-size: 1.8rem;" data-i18n="featured">Tanlangan Eksklyuziv Ko'zoynaklar</h2>
+    <div id="product-container" class="product-grid"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Optika.uz. Telegram Kanalimiz: <a href="https://t.me/achki_trend" style="color:var(--accent); text-decoration:none;" target="_blank">@achki_trend</a></p>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 1, name: { uz: "Klassik Qora Ko'zoynak", ru: "Классические Черные Очки", en: "Classic Black Glasses" }, price: "250,000 UZS", img: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQqTcWwrFqPbqzbkYBskd9-OrvulF4FAGuMmwnYdB6oOVR_B8MR9ZOP_7DEYJuMjccKHL8xHnQBBA1nVYQkkJAX2nXocttmDLBX0R2zUAS6ESncXv1SDT1Y7HpyPPt8gADv885YCDQ&usqp=CAc" },
+      { id: 2, name: { uz: "Zamonaviy Stil", ru: "Современный Стиль", en: "Modern Style" }, price: "320,000 UZS", img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRt1kSD0d8cusOOsfcGqtqpZ2WgEWw1PF0vFqZZIM40TRp2ojCDGTQX4BAjMl-xghGWP8N52w_vQW71Ob5ylc0y4EsCmw6vYu9W19tI8bm2iBRDUt5H-xcZ8-2244XC_sGw0gwl910&usqp=CAc" },
+      { id: 3, name: { uz: "Retro Premium", ru: "Ретро Премиум", en: "Retro Premium" }, price: "400,000 UZS", img: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ-M4ESQsRTf2lsFSCr7xQvgXuwg04gPF4sGDqVe7LAedsrgL_nF73z3vELBYU7gh3h0BmAUi7LP4aEfLnsxpd3GV5pWc7m8h2vWnewcxwzzlLFM-hUWJAImySFewg79QEGkzqcsg&usqp=CAc" },
+      { id: 4, name: { uz: "Sport Dizayn", ru: "Спортивный Дизайн", en: "Sport Design" }, price: "280,000 UZS", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUZmXT6-sDRYj6SHrX7wK7hioUnvTB6xIiu23139--bg&s" },
+      { id: 20, name: { uz: "Yangi Eksklyuziv Trend 2026", ru: "Новая Эксклюзивная Тренд 2026", en: "New Exclusive Trend 2026" }, price: "550,000 UZS", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp3NMsC0TDY7Mp9VO1dRI8m8J1Pp5WtXaJW92dLgTx_g&s=10" }
+    ];
+
+    const translations = {
+      uz: { home: "Bosh sahifa", catalog: "Katalog", detail: "Batafsil / Trendlar", cart: "Savat", contact: "Aloqa & Buyurtma", heroTitle: "Premium Ko'zoynaklar Kolleksiyasi", heroDesc: "O'z uslubingizga mos zamonaviy va sifatli ko'zoynaklarni hamyonbop narxlarda xarid qiling.", featured: "Tanlangan Eksklyuziv Ko'zoynaklar", addCart: "Savatga qo'shish" },
+      ru: { home: "Главная", catalog: "Каталог", detail: "Детали / Тренды", cart: "Корзина", contact: "Контакты & Заказ", heroTitle: "Премиальная Коллекция Очков", heroDesc: "Покупайте стильные и качественные очки по доступным ценам.", featured: "Избранные Эксклюзивные Очки", addCart: "В корзину" },
+      en: { home: "Home", catalog: "Catalog", detail: "Details / Trends", cart: "Cart", contact: "Contact & Order", heroTitle: "Premium Glasses Collection", heroDesc: "Shop stylish and high-quality glasses matching your unique style at affordable prices.", featured: "Featured Exclusive Glasses", addCart: "Add to Cart" }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'uz';
+    let currentTheme = localStorage.getItem('theme') || 'dark';
+    let cart = JSON.parse(localStorage.getItem('cart_items')) || [];
+
+    function toggleTheme() {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('theme', currentTheme);
+      document.getElementById('theme-btn').textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+    }
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      updateTexts();
+      renderProducts();
+    }
+
+    function updateTexts() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
+      });
+      document.getElementById('cart-badge-count').textContent = cart.length;
+    }
+
+    function addToCart(id) {
+      const p = products.find(x => x.id === id);
+      cart.push(p);
+      localStorage.setItem('cart_items', JSON.stringify(cart));
+      updateTexts();
+      alert(p.name[currentLang] + " " + (currentLang==='uz'?"savatga qo'shildi!":currentLang==='ru'?"добавлен в корзину!":"added to cart!"));
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('product-container');
+      grid.innerHTML = products.map(p => `
+        <div class="product-card">
+          <img src="${p.img}" alt="${p.name[currentLang]}" class="product-img">
+          <div class="product-info">
+            <div class="product-title">${p.name[currentLang]}</div>
+            <div class="product-price">${p.price}</div>
+            <button class="btn-primary" onclick="addToCart(${p.id})">${translations[currentLang].addCart}</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      document.getElementById('theme-btn').textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+      updateTexts();
+      renderProducts();
+    });
+  </script>
+</body>
+</html>

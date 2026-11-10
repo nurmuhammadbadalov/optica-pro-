@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achki Do'koni | Buyurtma Berish</title>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #151c2c;
+      --bg-card: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --border-color: #334155;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --accent: #d97706;
+      --accent-hover: #b45309;
+      --border-color: #e2e8f0;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; transition: background-color 0.3s, color 0.3s; }
+    body { background-color: var(--bg-primary); color: var(--text-primary); min-height: 100vh; display: flex; flex-direction: column; }
+    header { background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; box-shadow: var(--shadow); }
+    .nav-container { max-width: 1300px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 1.6rem; font-weight: 800; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 3rem; list-style: none; }
+    .nav-links a { color: var(--text-primary); text-decoration: none; font-weight: 600; padding: 0.6rem 1.2rem; border-radius: 8px; }
+    .nav-links a:hover, .nav-links a.active { background-color: var(--accent); color: #ffffff; }
+    .cart-badge { background-color: #ef4444; color: white; border-radius: 9999px; padding: 0.2rem 0.6rem; font-size: 0.8rem; font-weight: 700; margin-left: 5px; }
+    .controls { display: flex; align-items: center; gap: 0.8rem; }
+    .control-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); padding: 0.5rem 0.9rem; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    .control-btn:hover { border-color: var(--accent); color: var(--accent); }
+    main { max-width: 700px; margin: 2.5rem auto; padding: 0 1.5rem; flex: 1; width: 100%; }
+    .form-box { background-color: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color); padding: 2.5rem; box-shadow: var(--shadow); }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.6rem; font-weight: 600; }
+    .form-group input, .form-group textarea { width: 100%; padding: 0.9rem; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--bg-primary); color: var(--text-primary); font-size: 1rem; }
+    .btn-primary { background-color: var(--accent); color: #fff; padding: 1rem; border-radius: 10px; border: none; cursor: pointer; font-weight: 700; width: 100%; font-size: 1.1rem; }
+    .btn-primary:hover { background-color: var(--accent-hover); }
+    footer { background-color: var(--bg-secondary); border-top: 1px solid var(--border-color); text-align: center; padding: 2rem; margin-top: auto; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">🕶 OPTIKA.UZ</a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="home">Bosh sahifa</a></li>
+        <li><a href="catalog.html" data-i18n="catalog">Katalog</a></li>
+        <li><a href="detail.html" data-i18n="detail">Batafsil / Trendlar</a></li>
+        <li><a href="cart.html" data-i18n="cart">Savat <span id="cart-badge-count" class="cart-badge">0</span></a></li>
+        <li><a href="contact.html" class="active" data-i18n="contact">Aloqa & Buyurtma</a></li>
+      </ul>
+      <div class="controls">
+        <button id="theme-btn" class="control-btn" onclick="toggleTheme()">🌙</button>
+        <button class="control-btn" onclick="changeLanguage('uz')">UZ</button>
+        <button class="control-btn" onclick="changeLanguage('ru')">RU</button>
+        <button class="control-btn" onclick="changeLanguage('en')">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="form-box">
+      <h2 style="margin-bottom: 1.5rem;" data-i18n="contactTitle">Telegram Bot Orqali Buyurtma Berish</h2>
+      <form onsubmit="sendTelegramOrder(event)">
+        <div class="form-group">
+          <label data-i18n="formName">Ismingiz va Familiyangiz:</label>
+          <input type="text" id="cust-name" required placeholder="Ismingizni kiriting">
+        </div>
+        <div class="form-group">
+          <label data-i18n="formPhone">Telefon Raqamingiz:</label>
+          <input type="tel" id="cust-phone" required placeholder="+998 90 123 45 67">
+        </div>
+        <div class="form-group">
+          <label data-i18n="formMsg">Yetkazib Berish Manzili va Izoh:</label>
+          <textarea id="cust-note" rows="4" placeholder="Toshkent shahar, Chilonzor tumani..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" data-i18n="sendBot">@nurmuha114_bot Ga Buyurtmani Yuborish</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Optika.uz. Telegram Kanalimiz: <a href="https://t.me/achki_trend" style="color:var(--accent); text-decoration:none;" target="_blank">@achki_trend</a></p>
+  </footer>
+
+  <script>
+    const translations = {
+      uz: { home: "Bosh sahifa", catalog: "Katalog", detail: "Batafsil / Trendlar", cart: "Savat", contact: "Aloqa & Buyurtma", contactTitle: "Telegram Bot Orqali Buyurtma Berish", formName: "Ismingiz va Familiyangiz:", formPhone: "Telefon Raqamingiz:", formMsg: "Yetkazib Berish Manzili va Izoh:", sendBot: "@nurmuha114_bot Ga Buyurtmani Yuborish", success: "Buyurtmangiz muvaffaqiyatli Telegram Botga yo'naltirildi!" },
+      ru: { home: "Главная", catalog: "Каталог", detail: "Детали / Тренды", cart: "Корзина", contact: "Контакты & Заказ", contactTitle: "Заказ через Telegram Бот", formName: "Ваше Имя и Фамилия:", formPhone: "Ваш Номер Телефона:", formMsg: "Адрес Доставки и Комментарий:", sendBot: "Отправить Заказ в @nurmuha114_bot", success: "Ваш заказ успешно перенаправлен в Telegram бот!" },
+      en: { home: "Home", catalog: "Catalog", detail: "Details / Trends", cart: "Cart", contact: "Contact & Order", contactTitle: "Order via Telegram Bot", formName: "Your Full Name:", formPhone: "Your Phone Number:", formMsg: "Delivery Address and Note:", sendBot: "Send Order to @nurmuha114_bot", success: "Your order has been redirected to Telegram Bot!" }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'uz';
+    let currentTheme = localStorage.getItem('theme') || 'dark';
+    let cart = JSON.parse(localStorage.getItem('cart_items')) || [];
+
+    function toggleTheme() {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('theme', currentTheme);
+      document.getElementById('theme-btn').textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+    }
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      updateTexts();
+    }
+
+    function updateTexts() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
+      });
+      document.getElementById('cart-badge-count').textContent = cart.length;
+    }
+
+    function sendTelegramOrder(e) {
+      e.preventDefault();
+      const name = document.getElementById('cust-name').value;
+      const phone = document.getElementById('cust-phone').value;
+      const note = document.getElementById('cust-note').value;
+
+      let msg = `🛍 *Yangi Buyurtma!*%0A👤 *Ism:* ${name}%0A📞 *Tel:* ${phone}%0A📝 *Manzil/Izoh:* ${note}%0A%0A📦 *Xarid Savati:*%0A`;
+      if(cart.length === 0) {
+        msg += `(Savat bo'sh, mijoz to'g'ridan-to'g'ri bog'landi)`;
+      } else {
+        cart.forEach((item, i) => {
+          msg += `${i+1}. ${item.name.uz} - ${item.price}%0A`;
+        });
+      }
+
+      window.open(`https://t.me/nurmuha114_bot?start=buyurtma_${encodeURIComponent(name)}`, '_blank');
+      alert(translations[currentLang].success);
+      localStorage.removeItem('cart_items');
+      window.location.href = 'index.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      document.getElementById('theme-btn').textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+      updateTexts();
+    });
+  </script>
+</body>
+</html>
